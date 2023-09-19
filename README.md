@@ -2,7 +2,7 @@
 
 The Saga architecture pattern provides transaction management using a sequence of local transactions.
 
-In the Saga Choreography pattern, each microservice that is part of the transaction publishes an event that is processed by the next microservice. There is not any coordinator/controller between services and each services communicate with other to complete the transaction using messaging bus or broker.
+In the Saga Choreography pattern, each microservice that is part of the transaction publishes an event that is processed by the next microservice. There is not any coordinator/controller between services and each services communicate with others to complete the transaction using messaging bus or broker. A choreography saga pattern is a method to organise sagas where participants swap events without a centralized control point.
 
 We always welcome contributions from the community!
 
