@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: purchasing-service
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:7000/ms-saga-purchasing
+    username: #USER
+    password: #PASSWORD
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    
+server:
+  port: 7101
