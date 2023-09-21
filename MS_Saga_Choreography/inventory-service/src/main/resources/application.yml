@@ -4,8 +4,8 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:7000/saga-choreography
-    username: 
-    password: 
+    username: root
+    password: sibi@soft
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true

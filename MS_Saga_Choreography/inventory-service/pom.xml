@@ -4,10 +4,12 @@
     <groupId>com.aa</groupId>
     <artifactId>ms_saga_choreography</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+     <relativePath/>
   </parent>
   <artifactId>inventory-service</artifactId>
   <name>Inventory-Service</name>
   <description>Inventory-Service</description>
+  <packaging>jar</packaging>
   <dependencies>
   		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -40,6 +42,7 @@
 			<groupId>com.aa</groupId>
 			<artifactId>common-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
   </dependencies>
 </project>

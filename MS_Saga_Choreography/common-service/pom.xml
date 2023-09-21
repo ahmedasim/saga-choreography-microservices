@@ -4,10 +4,12 @@
     <groupId>com.aa</groupId>
     <artifactId>ms_saga_choreography</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+     <relativePath/>
   </parent>
   <artifactId>common-service</artifactId>
   <name>Common-Service</name>
   <description>Common-Service</description>
+  <packaging>jar</packaging>
   <dependencies>
   	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
