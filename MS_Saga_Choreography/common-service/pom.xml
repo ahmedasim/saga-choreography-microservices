@@ -8,4 +8,10 @@
   <artifactId>common-service</artifactId>
   <name>Common-Service</name>
   <description>Common-Service</description>
+  <dependencies>
+  	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	</dependency>
+  </dependencies>
 </project>
