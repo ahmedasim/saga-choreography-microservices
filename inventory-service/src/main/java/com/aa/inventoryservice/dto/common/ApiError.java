@@ -1,4 +1,4 @@
-package com.aa.commonservice.dto.common;
+package com.aa.inventoryservice.dto.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

@@ -1,4 +1,4 @@
-package com.aa.commonservice.dto.inventoryservice.request;
+package com.aa.purchasingservice.dto.response;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InventoryItemRequestDto {
+public class ShipmentResponseDto {
 	private Long itemId;
     private String itemCode;
     private String itemName;

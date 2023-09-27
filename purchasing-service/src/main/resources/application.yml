@@ -1,9 +1,9 @@
 spring:
   application:
-    name: inventory-service
+    name: purchasing-service
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:7000/saga-choreography
+    url: jdbc:mysql://localhost:7000/ms-saga-purchasing
     username: #USER
     password: #PASSWORD
   jpa:

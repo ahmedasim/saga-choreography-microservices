@@ -1,7 +1,7 @@
 package com.aa.inventoryservice.service;
 
-import com.aa.commonservice.dto.inventoryservice.request.InventoryItemRequestDto;
-import com.aa.commonservice.dto.inventoryservice.response.InventoryItemResponseDto;
+import com.aa.inventoryservice.dto.request.InventoryItemRequestDto;
+import com.aa.inventoryservice.dto.response.InventoryItemResponseDto;
 
 public interface InventoryItemService {
 

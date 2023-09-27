@@ -6,8 +6,8 @@ import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aa.commonservice.dto.inventoryservice.request.InventoryItemRequestDto;
-import com.aa.commonservice.dto.inventoryservice.response.InventoryItemResponseDto;
+import com.aa.inventoryservice.dto.request.InventoryItemRequestDto;
+import com.aa.inventoryservice.dto.response.InventoryItemResponseDto;
 import com.aa.inventoryservice.entity.InventoryItemEntity;
 import com.aa.inventoryservice.repo.InventoryItemRepo;
 import com.aa.inventoryservice.service.InventoryItemService;

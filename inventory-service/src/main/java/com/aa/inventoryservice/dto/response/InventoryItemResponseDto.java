@@ -1,4 +1,4 @@
-package com.aa.commonservice.dto.inventoryservice.response;
+package com.aa.inventoryservice.dto.response;
 
 import java.math.BigDecimal;
 

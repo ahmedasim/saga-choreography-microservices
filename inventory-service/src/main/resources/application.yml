@@ -3,7 +3,7 @@ spring:
     name: inventory-service
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:7000/saga-choreography
+    url: jdbc:mysql://localhost:7000/ms-saga-inventory
     username: #USER
     password: #PASSWORD
   jpa:
@@ -12,4 +12,4 @@ spring:
     show-sql: true
     
 server:
-  port: 7101
+  port: 7100

@@ -1,4 +1,4 @@
-package com.aa.inventoryservice.controller;
+package com.aa.purchasingservice.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aa.commonservice.dto.common.ApiError;
-import com.aa.commonservice.dto.common.ApiResponse;
-import com.aa.commonservice.dto.inventoryservice.request.InventoryItemRequestDto;
-import com.aa.commonservice.dto.inventoryservice.response.InventoryItemResponseDto;
-import com.aa.inventoryservice.service.InventoryItemService;
+import com.aa.purchasingservice.dto.common.ApiError;
+import com.aa.purchasingservice.dto.common.ApiResponse;
+import com.aa.purchasingservice.dto.request.ShipmentRequestDto;
+import com.aa.purchasingservice.dto.response.ShipmentResponseDto;
+import com.aa.purchasingservice.service.ShipmentService;
 
 @RestController("/item")
-public class InventoryItemController {
+public class ShipmentController {
 
 	@Autowired
-	InventoryItemService service;
+	ShipmentService service;
 	
 	@PostMapping
-	public ApiResponse<InventoryItemResponseDto> save(@RequestBody InventoryItemRequestDto requestDto) {
-		ApiResponse<InventoryItemResponseDto> apiResponse = new ApiResponse<>();
+	public ApiResponse<ShipmentResponseDto> save(@RequestBody ShipmentRequestDto requestDto) {
+		ApiResponse<ShipmentResponseDto> apiResponse = new ApiResponse<>();
 		try {
-			InventoryItemResponseDto responseDto = service.save(requestDto);
+			ShipmentResponseDto responseDto = service.save(requestDto);
 			apiResponse.setSuccess(true);
 			apiResponse.setResponse(responseDto);
 			apiResponse.setMessage("Entity saved successfully");
@@ -42,10 +42,10 @@ public class InventoryItemController {
 	}
 	
 	@PutMapping("{itemId}")
-	public ApiResponse<InventoryItemResponseDto> update(@RequestBody InventoryItemRequestDto requestDto, @PathVariable Long itemId) {
-		ApiResponse<InventoryItemResponseDto> apiResponse = new ApiResponse<>();
+	public ApiResponse<ShipmentResponseDto> update(@RequestBody ShipmentRequestDto requestDto, @PathVariable Long itemId) {
+		ApiResponse<ShipmentResponseDto> apiResponse = new ApiResponse<>();
 		try {
-			InventoryItemResponseDto responseDto = service.update(requestDto, itemId);
+			ShipmentResponseDto responseDto = service.update(requestDto, itemId);
 			apiResponse.setSuccess(true);
 			apiResponse.setResponse(responseDto);
 			apiResponse.setMessage("Entity updated successfully");
@@ -59,8 +59,8 @@ public class InventoryItemController {
 	}
 	
 	@DeleteMapping("{itemId}")
-	public ApiResponse<InventoryItemResponseDto> delete(@PathVariable Long itemId) {
-		ApiResponse<InventoryItemResponseDto> apiResponse = new ApiResponse<>();
+	public ApiResponse<ShipmentResponseDto> delete(@PathVariable Long itemId) {
+		ApiResponse<ShipmentResponseDto> apiResponse = new ApiResponse<>();
 		try {
 			service.delete(itemId);
 			apiResponse.setSuccess(true);
@@ -75,10 +75,10 @@ public class InventoryItemController {
 	}
 	
 	@GetMapping("{itemId}")
-	public ApiResponse<InventoryItemResponseDto> findById(@PathVariable Long itemId) {
-		ApiResponse<InventoryItemResponseDto> apiResponse = new ApiResponse<>();
+	public ApiResponse<ShipmentResponseDto> findById(@PathVariable Long itemId) {
+		ApiResponse<ShipmentResponseDto> apiResponse = new ApiResponse<>();
 		try {
-			InventoryItemResponseDto responseDto = service.findById(itemId);
+			ShipmentResponseDto responseDto = service.findById(itemId);
 			apiResponse.setSuccess(true);
 			apiResponse.setResponse(responseDto);
 			apiResponse.setMessage("Entity fetched successfully");

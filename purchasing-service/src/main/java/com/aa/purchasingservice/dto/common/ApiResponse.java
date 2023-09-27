@@ -1,4 +1,4 @@
-package com.aa.commonservice.dto.common;
+package com.aa.purchasingservice.dto.common;
 
 import java.sql.Timestamp;
 import java.util.List;

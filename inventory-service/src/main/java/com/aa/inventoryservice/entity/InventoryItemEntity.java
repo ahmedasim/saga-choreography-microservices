@@ -2,7 +2,8 @@ package com.aa.inventoryservice.entity;
 
 import java.math.BigDecimal;
 
-import com.aa.commonservice.enums.InventoryItemStatus;
+import com.aa.inventoryservice.dto.enums.InventoryItemStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

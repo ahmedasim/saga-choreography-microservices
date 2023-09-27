@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aa.commonservice.dto.common.ApiError;
-import com.aa.commonservice.dto.common.ApiResponse;
-import com.aa.commonservice.dto.inventoryservice.request.InventoryItemRequestDto;
-import com.aa.commonservice.dto.inventoryservice.response.InventoryItemResponseDto;
+import com.aa.inventoryservice.dto.common.ApiError;
+import com.aa.inventoryservice.dto.common.ApiResponse;
+import com.aa.inventoryservice.dto.request.InventoryItemRequestDto;
+import com.aa.inventoryservice.dto.response.InventoryItemResponseDto;
 import com.aa.inventoryservice.service.InventoryItemService;
 
 @RestController("/item")

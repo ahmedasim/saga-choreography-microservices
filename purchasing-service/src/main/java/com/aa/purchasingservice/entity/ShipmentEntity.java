@@ -1,8 +1,9 @@
-package com.aa.inventoryservice.entity;
+package com.aa.purchasingservice.entity;
 
 import java.math.BigDecimal;
 
-import com.aa.commonservice.enums.InventoryItemStatus;
+import com.aa.purchasingservice.dto.enums.ShipmentStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 }, uniqueConstraints = {
 		@UniqueConstraint(name="item_name_unique", columnNames = {"itemName"})
 })
-public class InventoryItemEntity extends InventoryBaseEntity {
+public class ShipmentEntity extends PurchasingBaseEntity {
 	
 	@Id
 	@GeneratedValue
@@ -36,7 +37,7 @@ public class InventoryItemEntity extends InventoryBaseEntity {
 	private String itemCode;
     private String itemName;
     @Enumerated(EnumType.STRING)
-    private InventoryItemStatus statusId;
+    private ShipmentStatus statusId;
     private BigDecimal cost;
 
 }
