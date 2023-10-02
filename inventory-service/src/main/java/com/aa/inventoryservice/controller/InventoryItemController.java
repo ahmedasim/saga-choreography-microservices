@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aa.inventoryservice.dto.common.ApiError;
@@ -18,7 +19,8 @@ import com.aa.inventoryservice.dto.request.InventoryItemRequestDto;
 import com.aa.inventoryservice.dto.response.InventoryItemResponseDto;
 import com.aa.inventoryservice.service.InventoryItemService;
 
-@RestController("/item")
+@RestController
+@RequestMapping("/api/v1/item")
 public class InventoryItemController {
 
 	@Autowired
@@ -78,10 +80,27 @@ public class InventoryItemController {
 	public ApiResponse<InventoryItemResponseDto> findById(@PathVariable Long itemId) {
 		ApiResponse<InventoryItemResponseDto> apiResponse = new ApiResponse<>();
 		try {
-			InventoryItemResponseDto responseDto = service.findById(itemId);
+			InventoryItemResponseDto responseDto = service.findResponseDtoById(itemId);
 			apiResponse.setSuccess(true);
 			apiResponse.setResponse(responseDto);
 			apiResponse.setMessage("Entity fetched successfully");
+			return apiResponse;
+		}catch(Exception e) {
+			List<ApiError> errors = new ArrayList<ApiError>();
+			errors.add(new ApiError("", e.getMessage()));
+			apiResponse.setApiErrors(errors );
+		}
+		return apiResponse;
+	}
+	
+	@GetMapping
+	public ApiResponse<List<InventoryItemResponseDto>> findAll() {
+		ApiResponse<List<InventoryItemResponseDto>> apiResponse = new ApiResponse<>();
+		try {
+			List<InventoryItemResponseDto> responseList = service.findAll();
+			apiResponse.setSuccess(true);
+			apiResponse.setResponse(responseList);
+			apiResponse.setMessage("Entities fetched successfully");
 			return apiResponse;
 		}catch(Exception e) {
 			List<ApiError> errors = new ArrayList<ApiError>();

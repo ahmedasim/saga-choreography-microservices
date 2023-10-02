@@ -24,8 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "inv_items", indexes = {
 		@Index(name = "item_id_index", columnList = "itemId"),
-		@Index(name = "item_code_index", columnList = "itemCode", unique = true),
-		@Index(name = "category_id_index", columnList = "categoryId")
+		@Index(name = "item_code_index", columnList = "itemCode", unique = true)
 }, uniqueConstraints = {
 		@UniqueConstraint(name="item_name_unique", columnNames = {"itemName"})
 })
@@ -38,6 +37,7 @@ public class InventoryItemEntity extends InventoryBaseEntity {
     private String itemName;
     @Enumerated(EnumType.STRING)
     private InventoryItemStatus statusId;
+    private BigDecimal quantity;
     private BigDecimal cost;
 
 }

@@ -1,5 +1,6 @@
 package com.aa.inventoryservice.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.kafka.common.errors.ResourceNotFoundException;
@@ -31,7 +32,11 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 
 	@Override
 	public InventoryItemResponseDto update(InventoryItemRequestDto requestDto, Long itemId) {
-		return null;
+		InventoryItemEntity entity = findById(itemId);
+		entity = objectMapper.convertValue(requestDto, InventoryItemEntity.class);
+		entity.setItemId(itemId);
+		repo.save(entity);
+		return objectMapper.convertValue(entity, InventoryItemResponseDto.class);
 	}
 
 	@Override
@@ -45,13 +50,19 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 	}
 
 	@Override
-	public InventoryItemResponseDto findById(Long itemId) {
-		Optional<InventoryItemEntity> opt = repo.findById(itemId);
-		if(opt.isPresent()) {
-			return objectMapper.convertValue(opt.get(), InventoryItemResponseDto.class);
-		}else {
-			throw new ResourceNotFoundException("Resounce Not Found");
-		}
+	public InventoryItemResponseDto findResponseDtoById(Long itemId) {
+		InventoryItemEntity e = repo.findById(itemId).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
+		return objectMapper.convertValue(e, InventoryItemResponseDto.class);
+	}
+	
+	@Override
+	public InventoryItemEntity findById(Long itemId) {
+		return repo.findById(itemId).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
+	}
+
+	@Override
+	public List<InventoryItemResponseDto> findAll() {
+		return repo.findAll().stream().map(e -> objectMapper.convertValue(e, InventoryItemResponseDto.class)).toList();
 	}
 
 }
