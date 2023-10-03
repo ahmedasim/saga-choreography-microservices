@@ -11,6 +11,7 @@ import com.aa.purchasingservice.dto.enums.ShipmentStatus;
 import com.aa.purchasingservice.dto.request.ShipmentRequestDto;
 import com.aa.purchasingservice.dto.response.ShipmentResponseDto;
 import com.aa.purchasingservice.entity.ShipmentEntity;
+import com.aa.purchasingservice.entity.ShipmentItem;
 import com.aa.purchasingservice.repo.ShipmentRepo;
 import com.aa.purchasingservice.service.ShipmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,12 +23,18 @@ public class ShipmentServiceImpl implements ShipmentService {
 	ShipmentRepo repo;
 	@Autowired
 	ObjectMapper objectMapper = new ObjectMapper();
+	
+	public ShipmentResponseDto mapToResponse(ShipmentEntity entity) {
+		ShipmentResponseDto toReturn = objectMapper.convertValue(entity, ShipmentResponseDto.class);
+		toReturn.getShipmentItems().forEach(si -> si.setShipmentId(entity.getShipmentId()));
+		return toReturn;
+	}
 
 	@Override
 	public ShipmentResponseDto save(ShipmentRequestDto requestDto) {
 		ShipmentEntity entity = objectMapper.convertValue(requestDto, ShipmentEntity.class);
 		repo.save(entity);
-		return objectMapper.convertValue(entity, ShipmentResponseDto.class);
+		return mapToResponse(entity);
 	}
 
 	@Override
@@ -38,11 +45,14 @@ public class ShipmentServiceImpl implements ShipmentService {
 		}else {
 			entity = objectMapper.convertValue(requestDto, ShipmentEntity.class);
 			entity.setShipmentId(shipmentId);
+			for(ShipmentItem si : entity.getShipmentItems()) {
+				si.setShipment(entity);
+			}
 			repo.save(entity);
 			if(entity.getStatusId().equals(ShipmentStatus.FINALIZED)) {
 				//TODO: Update Invoice Service to update item counts
 			}
-			return objectMapper.convertValue(entity, ShipmentResponseDto.class);
+			return mapToResponse(entity);
 		}
 	}
 
@@ -61,8 +71,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Override
 	public ShipmentResponseDto findResponseDtoById(Long shipmentId) {
-		ShipmentEntity e = repo.findById(shipmentId).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
-		return objectMapper.convertValue(e, ShipmentResponseDto.class);
+		ShipmentEntity entity = repo.findById(shipmentId).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found!"));
+		return mapToResponse(entity);
 	}
 	
 	@Override
@@ -72,7 +82,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	
 	@Override
 	public List<ShipmentResponseDto> findAll(){
-		return repo.findAll().stream().map(e -> objectMapper.convertValue(e, ShipmentResponseDto.class)).toList();
+		return repo.findAll().stream().map(e -> mapToResponse(e)).toList();
 	}
 
 	@Override

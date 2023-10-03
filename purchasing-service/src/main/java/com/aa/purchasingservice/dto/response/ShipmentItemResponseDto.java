@@ -2,8 +2,6 @@ package com.aa.purchasingservice.dto.response;
 
 import java.math.BigDecimal;
 
-import com.aa.purchasingservice.entity.ShipmentEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ShipmentItemResponseDto {
 	
 	private Long shipmentItemId;
-	private ShipmentEntity shipment;
+	private Long shipmentId;
 	private BigDecimal shipmentQuantity;
 	private BigDecimal shipmentCost;
 }

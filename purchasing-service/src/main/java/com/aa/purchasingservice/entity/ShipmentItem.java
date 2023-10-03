@@ -2,6 +2,8 @@ package com.aa.purchasingservice.entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +32,7 @@ public class ShipmentItem extends PurchasingBaseEntity  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long shipmentItemId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="shipment_id", nullable=false, referencedColumnName = "shipmentId")
 	private ShipmentEntity shipment;

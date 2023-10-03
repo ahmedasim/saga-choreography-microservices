@@ -1,8 +1,9 @@
 package com.aa.purchasingservice.dto.response;
 
+import java.util.Date;
 import java.util.List;
 
-import com.aa.purchasingservice.dto.request.ShipmentItemRequestDto;
+import com.aa.purchasingservice.dto.enums.ShipmentStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ShipmentResponseDto {
 	
 	private Long shipmentId;
-	private String shipmentDate;
-    private Integer statusId;
-    List<ShipmentItemRequestDto> shipmentItems;
+	private Date shipmentDate;
+    private ShipmentStatus statusId;
+    List<ShipmentItemResponseDto> shipmentItems;
 }
