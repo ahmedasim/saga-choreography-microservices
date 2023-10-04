@@ -25,9 +25,13 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 	
 	@Override
 	public InventoryItemResponseDto save(InventoryItemRequestDto requestDto) {
-		InventoryItemEntity entity = objectMapper.convertValue(requestDto, InventoryItemEntity.class);
-		repo.save(entity);
-		return objectMapper.convertValue(entity, InventoryItemResponseDto.class);
+		if(requestDto.getItemId() != null && requestDto.getItemId() > 0) {
+			return update(requestDto, requestDto.getItemId());
+		}else{
+			InventoryItemEntity entity = objectMapper.convertValue(requestDto, InventoryItemEntity.class);
+			repo.save(entity);
+			return objectMapper.convertValue(entity, InventoryItemResponseDto.class);
+		}
 	}
 
 	@Override

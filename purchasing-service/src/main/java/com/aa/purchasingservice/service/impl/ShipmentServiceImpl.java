@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aa.purchasingservice.dto.enums.ShipmentStatus;
 import com.aa.purchasingservice.dto.request.ShipmentRequestDto;
@@ -14,6 +15,7 @@ import com.aa.purchasingservice.entity.ShipmentEntity;
 import com.aa.purchasingservice.entity.ShipmentItem;
 import com.aa.purchasingservice.repo.ShipmentRepo;
 import com.aa.purchasingservice.service.ShipmentService;
+import com.aa.purchasingservice.service.eventservice.publisher.ShipmentFinalizedEventPublisher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -24,19 +26,28 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Autowired
 	ObjectMapper objectMapper = new ObjectMapper();
 	
+	@Autowired
+	ShipmentFinalizedEventPublisher eventPublisher;
+	
 	public ShipmentResponseDto mapToResponse(ShipmentEntity entity) {
 		ShipmentResponseDto toReturn = objectMapper.convertValue(entity, ShipmentResponseDto.class);
 		toReturn.getShipmentItems().forEach(si -> si.setShipmentId(entity.getShipmentId()));
 		return toReturn;
 	}
-
+	
 	@Override
 	public ShipmentResponseDto save(ShipmentRequestDto requestDto) {
-		ShipmentEntity entity = objectMapper.convertValue(requestDto, ShipmentEntity.class);
-		repo.save(entity);
-		return mapToResponse(entity);
+		if(requestDto.getShipmentId() != null && requestDto.getShipmentId() > 0) {
+			return update(requestDto, requestDto.getShipmentId());
+		}else {
+			ShipmentEntity entity = objectMapper.convertValue(requestDto, ShipmentEntity.class);
+			entity.getShipmentItems().forEach(si -> si.setShipment(entity));
+			repo.save(entity);
+			return mapToResponse(entity);
+		}
 	}
 
+	@Transactional
 	@Override
 	public ShipmentResponseDto update(ShipmentRequestDto requestDto, Long shipmentId) {
 		ShipmentEntity entity = findById(shipmentId);
@@ -50,7 +61,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 			}
 			repo.save(entity);
 			if(entity.getStatusId().equals(ShipmentStatus.FINALIZED)) {
-				//TODO: Update Invoice Service to update item counts
+				//TODO: produce kafka shipment finalized event 
+				//eventPublisher.publishEvent(requestDto);
 			}
 			return mapToResponse(entity);
 		}
